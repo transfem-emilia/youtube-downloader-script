@@ -20,7 +20,7 @@ Download It From The [Latest Release](https://github.com/transfem-emilia/youtube
 # IV. Using The Script
 1. Right Click and Click "Run In Powershell"
 
-    a. Alternatively, You Can Use A Batch Script To Run It Easier
+    a. Alternatively, You Can Use A Batch Script To Run It Easier (See [Using A Batch Script](https://github.com/transfem-emilia/youtube-downloader-script/blob/main/batch-script/Using-A-Batch-Script.md))
 2. A Window Will Open Asking For The URL, Paste The URL
 3. Click  `OK`
 4. The Window Will Show A Progress Bar, When The Window Closes, That Means Your Video Is Downloaded, Videos Are Downloaded To The `Downloaded Videos` Folder In `C:\Users\your-user\Videos\`
