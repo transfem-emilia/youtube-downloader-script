@@ -1,26 +1,44 @@
-# YouTube Video Downloader Powershell Script
-This is a script for use with windows powershell that can download youtube videos for free.
+# YouTube Video Downloader PowerShell Script
 
-# I. Requirements
-- Windows 10/11
-- Windows Powershell (Should Be Installed By Default, If You Do Not Have Powershell, Download It By [Following The Guide From Microsoft](https://learn.microsoft.com/en-ca/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.5#install-powershell-using-winget-recommended))
-- The Latest Version of [yt-dlp for Windows (Download "yt-dlp.exe")](https://github.com/yt-dlp/yt-dlp/releases/latest)
-    - Make Sure To Download **ALL** The Dependencies For yt-dlp
+A PowerShell script for Windows that lets you download YouTube videos for free.
 
-# II. Where To Download
-Download It From The [Latest Release](https://github.com/transfem-emilia/youtube-downloader-script/releases/latest)
+## Requirements
 
-# III. Installation and Setup
-1. Place The Powershell Script Wherever You'd Like To Place It
-2. Place `yt-dlp.exe` Wherever You'd Like To Place It
-3. Right Click The Script and Click `Edit In Notepad`
-4. Go To Line 73, It Contains The Following Text `$ytDlpPath = "C:\Path\To\yt-dlp.exe" # Update this!`
-5. Replace `C:\Path\To\yt-dlp.exe` With The Correct Directory For `yt-dlp.exe`
+- Windows 10 or Windows 11  
+- Windows PowerShell (preinstalled on most systems)  
+- The latest version of **[yt-dlp.exe](https://github.com/yt-dlp/yt-dlp/releases/latest)** for Windows  
+- All required dependencies for yt-dlp  
 
-# IV. Using The Script
-1. Right Click and Click "Run In Powershell"
+> To install PowerShell, see [Microsoft's installation guide](https://learn.microsoft.com/powershell/).
 
-    a. Alternatively, You Can Use A Batch Script To Run It Easier (See [Using A Batch Script](https://github.com/transfem-emilia/youtube-downloader-script/blob/main/batch-script/Using-A-Batch-Script.md))
-2. A Window Will Open Asking For The URL, Paste The URL
-3. Click  `OK`
-4. The Window Will Show A Progress Bar, When The Window Closes, That Means Your Video Is Downloaded, Videos Are Downloaded To The `Downloaded Videos` Folder In `C:\Users\your-user\Videos\`
+## Download
+
+Get the latest version of the script from the **[Latest Release](https://github.com/transfem-emilia/youtube-downloader-script/releases/latest)** section of this repository.
+
+## Installation and Setup
+
+1. Place the PowerShell script anywhere on your computer.  
+2. Place `yt-dlp.exe` wherever you’d like.  
+3. Right-click the script and choose **Edit in Notepad**.  
+4. Go to **line 73**. It should look like this:  
+   ```powershell
+   $ytDlpPath = "C:\Path\To\yt-dlp.exe" # Update this!
+   ```
+5. Replace the path with the actual location of `yt-dlp.exe`. For example:  
+   ```powershell
+   $ytDlpPath = "C:\Tools\yt-dlp.exe"
+   ```
+
+## How to Use the Script
+
+1. Right-click the script and choose **Run in PowerShell**.  
+2. When prompted, paste the URL of the YouTube video you want to download.  
+3. Select **OK** to begin the download.  
+4. A progress bar will appear. When the window closes, the download is complete.  
+
+> Downloaded videos are saved to the **Downloaded Videos** folder at:  
+> `C:\Users\your-user\Videos\Downloaded Videos`
+
+### Tip: Run with a Batch File
+
+You can use a batch script to run this script more easily. See **[Using a Batch Script](https://github.com/transfem-emilia/youtube-downloader-script/blob/main/batch-script/Using-A-Batch-Script.md)** in this repository for details.
