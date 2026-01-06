@@ -59,6 +59,12 @@ $okButton.Add_Click({
         return
     }
 
+    # CHECK: Is yt-dlp in the system PATH?
+    if (-not (Get-Command "yt-dlp" -ErrorAction SilentlyContinue)) {
+        [System.Windows.Forms.MessageBox]::Show("Error: 'yt-dlp' was not found in your system PATH.`n`nPlease ensure it is installed and added to your Environment Variables.", "Dependency Missing")
+        return
+    }
+
     # Hide URL input form, show progress form
     $form.Hide()
     $progressForm.Show()
@@ -69,10 +75,10 @@ $okButton.Add_Click({
         New-Item -ItemType Directory -Path $targetPath | Out-Null
     }
 
-    # Full path to yt-dlp.exe
-    $ytDlpPath = "C:\Path\To\yt-dlp.exe" # Update this!
+    # Use the system path command
+    $ytDlpPath = "yt-dlp" 
 
-    # Build argument list with --newline for parsing progress
+    # Build argument list
     $arguments = @(
         "`"$url`""
         "-f"
@@ -82,7 +88,7 @@ $okButton.Add_Click({
         "`"$targetPath\%(title)s.%(ext)s`""
     )
 
-    # Create a process start info object to redirect output
+    # Create a process start info object
     $startInfo = New-Object System.Diagnostics.ProcessStartInfo
     $startInfo.FileName = $ytDlpPath
     $startInfo.Arguments = $arguments -join " "
@@ -94,18 +100,24 @@ $okButton.Add_Click({
 
     $process = New-Object System.Diagnostics.Process
     $process.StartInfo = $startInfo
-    $process.Start() | Out-Null
+    
+    try {
+        $process.Start() | Out-Null
+    } catch {
+        [System.Windows.Forms.MessageBox]::Show("Failed to start yt-dlp: $($_.Exception.Message)")
+        $progressForm.Close()
+        $form.Show()
+        return
+    }
 
     # Async read output lines and update progress bar
     $outputReader = $process.StandardOutput
     while (-not $process.HasExited) {
         while (-not $outputReader.EndOfStream) {
             $line = $outputReader.ReadLine()
-            # yt-dlp outputs progress lines like: [download]  45.3% of 50.00MiB at 1.00MiB/s ETA 00:30
             if ($line -match "\[download\]\s+(\d{1,3}\.\d)%") {
                 $percent = [math]::Round([double]$matches[1])
                 if ($percent -ge 0 -and $percent -le 100) {
-                    # Update progress bar safely on UI thread
                     $progressBar.Invoke([action]{
                         $progressBar.Value = $percent
                         $progressLabel.Text = "Progress: $percent%"
@@ -116,7 +128,7 @@ $okButton.Add_Click({
         Start-Sleep -Milliseconds 100
     }
 
-    # Read remaining output after process exits
+    # Read remaining output
     while (-not $outputReader.EndOfStream) {
         $line = $outputReader.ReadLine()
         if ($line -match "\[download\]\s+(\d{1,3}\.\d)%") {
@@ -130,7 +142,6 @@ $okButton.Add_Click({
 
     $progressLabel.Invoke([action]{ $progressLabel.Text = "Download complete! 🎉" })
 
-    # Optional: Wait a sec before closing or allow user to close
     Start-Sleep -Seconds 3
     $progressForm.Close()
     $form.Close()

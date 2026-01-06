@@ -6,7 +6,7 @@ A PowerShell script for Windows that lets you download YouTube videos for free.
 
 - Windows 10 or Windows 11  
 - Windows PowerShell (preinstalled on most systems)  
-- The latest version of **[yt-dlp.exe](https://github.com/yt-dlp/yt-dlp/releases/latest)** for Windows  
+- The latest version of yt-dlp for Windows (See **[yt-dlp Installation](https://github.com/transfem-emilia/youtube-downloader-script/blob/main/yt-dlp-install/yt-dlp.md)** for how to install)
 - All required dependencies for yt-dlp  
 
 > To install PowerShell, see [Microsoft's installation guide](https://learn.microsoft.com/powershell/).
@@ -18,16 +18,6 @@ Get the latest version of the script from the **[Latest Release](https://github.
 ## Installation and Setup
 
 1. Place the PowerShell script anywhere on your computer.  
-2. Place `yt-dlp.exe` wherever you’d like.  
-3. Right-click the script and choose **Edit in Notepad**.  
-4. Go to **line 73**. It should look like this:  
-   ```powershell
-   $ytDlpPath = "C:\Path\To\yt-dlp.exe" # Update this!
-   ```
-5. Replace the path with the actual location of `yt-dlp.exe`. For example:  
-   ```powershell
-   $ytDlpPath = "C:\Tools\yt-dlp.exe"
-   ```
 
 ## How to Use the Script
 
